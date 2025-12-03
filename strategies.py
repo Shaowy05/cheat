@@ -8,7 +8,11 @@ class Strategy(Protocol):
 
 
 def random_strategy(player_view: PlayerView) -> Action:
-    random_option: ActionOption = random.choice(list(ActionOption))
+    allowed_options = [ActionOption.TRUTH, ActionOption.LIE]
+    if player_view.previous_claim is not None and player_view.opponent_pile_size > 0:
+        allowed_options.append(ActionOption.CALL)
+
+    random_option: ActionOption = random.choice(allowed_options)
 
     if random_option is ActionOption.CALL:
         return Action(random_option, None, None)

@@ -41,7 +41,7 @@ FULL_DECK: Set[Card] = set(Card(n, s) for n in range(1, 14) for s in Suit)
 class PlayerView:
     hand: Set[Card]
     pile: List[Card]
-    previous_claim: Card
+    previous_claim: Optional[Card]
     opponent_pile_size: int
     start_player_id: int
 
