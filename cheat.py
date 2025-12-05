@@ -138,7 +138,7 @@ class TwoPlayerCheat:
                 opponent.pile = []
                 active_player.pile = []
 
-    def play(self):
+    def play(self) -> Player:
         winner: Optional[Player] = None
         while winner is None:
             active_player = self._get_player(self.active_player_id)
@@ -153,13 +153,15 @@ class TwoPlayerCheat:
                 break
 
         if winner is not None:
-            print("\n=== GAME OVER ===")
-            print(f"Player {winner.id} WINS!")
-            print(
-                f"Final piles: "
-                f"P1 = {len(self.player_one.pile)} cards, "
-                f"P2 = {len(self.player_two.pile)} cards"
-            )
+            if self.verbose:
+                print("\n=== GAME OVER ===")
+                print(f"Player {winner.id} WINS!")
+                print(
+                    f"Final piles: "
+                    f"P1 = {len(self.player_one.pile)} cards, "
+                    f"P2 = {len(self.player_two.pile)} cards"
+                )
+            return winner
 
     # --- Visualisation Helpers -------------------
 
