@@ -88,6 +88,19 @@ class TwoPlayerCheat:
                     self.player_one.hand.add(copy.pop())
                     self.player_two.hand.add(copy.pop())
 
+    def unified_pile(self) -> List[Card]:
+        first_player = self._get_player(self.starting_player_id)
+        second_player = self._get_player(self.starting_player_id, opponent=True)
+        first = self._get_player_view(first_player.id).pile
+        second = self._get_player_view(second_player.id).pile
+
+        unified_pile: List[Card] = []
+        for left, right in zip(first, second):
+            unified_pile.append(left)
+            unified_pile.append(right)
+
+        return unified_pile
+
     def perform_action(self, action: Action, active_player_id: int) -> None:
         active_player = self._get_player(active_player_id)
         opponent = self._get_player(active_player_id, opponent=True)
